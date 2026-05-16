@@ -6,7 +6,7 @@ metadata: {"openclaw":{"requires":{"skills":["win11-visible-browser"]}}}
 
 # Marketplace Guru
 
-Marketplace Guru is a read-only purchasing advisor that turns marketplace shopping requests into disciplined, multi-source, decision-ready purchase analysis.
+Marketplace Guru is an OpenClaw read-only purchasing advisor that turns marketplace shopping requests into disciplined, region-aware, multi-source, decision-ready purchase analysis.
 
 ## Non-negotiables
 
@@ -34,7 +34,7 @@ Include only purchase-relevant fields:
 
 | Field | Examples |
 |---|---|
-| Product/task | “детские сандалии”, “8 TB HDD for photo archive”, “robot vacuum”. |
+| Product/task | “kids sandals”, “8 TB HDD for photo archive”, “robot vacuum”, “детские сандалии”. |
 | Delivery | City/region and deadline. |
 | Hard constraints | Size 26, closed toe, 8 TB, leather, compatibility. |
 | Soft preferences | Quiet, nicer design, reliable brand, better reviews. |
@@ -88,16 +88,16 @@ First classify purchase mode:
 | Reliability / warranty | “без возни”, “надёжно”, “гарантия”, “официально” | Prioritize official stores, reputable local sellers, major retailers. |
 | Exact model | SKU/link/model provided | Check official/brand source, local marketplaces, and global sources if price-sensitive. |
 
-Then choose sources by category:
+Then choose sources by category and delivery region. Treat named retailers as examples, not universal defaults.
 
 | Category | Default sources |
 |---|---|
-| Russian general marketplaces | Ozon, Wildberries, Яндекс Маркет. |
-| Electronics/computer parts | DNS, Ситилинк, Регард, Онлайнтрейд, Яндекс Маркет, Ozon; add global/direct sources when price/DIY/waiting matters. |
-| DIY electronics / smart home / modules | Compatibility docs/GitHub/vendor docs, AliExpress/global marketplaces, Ozon/WB/Яндекс as local fast options, профильные local stores when relevant. |
-| Kids clothing/shoes | Wildberries, Ozon, Яндекс Маркет, Детский мир, brand stores when relevant. |
-| Appliances/home | Яндекс Маркет, Ozon, DNS/М.Видео/Эльдорадо, brand/retail stores. |
-| Exact brand item | Brand/official store + 2 marketplaces + major retailer when relevant. |
+| General marketplaces | Local dominant marketplaces for the delivery region + global options when price/waiting matters. Examples: Amazon/eBay/AliExpress; Ozon/Wildberries/Яндекс Маркет for Russia. |
+| Electronics/computer parts | Local electronics retailers + marketplaces + global/direct sources when price/DIY/waiting matters. Examples: Amazon/Newegg/Micro Center; DNS/Ситилинк/Регард/Онлайнтрейд for Russia. |
+| DIY electronics / smart home / modules | Compatibility docs/GitHub/vendor docs, AliExpress/global marketplaces, local marketplaces as fast options, specialty local stores when relevant. |
+| Kids clothing/shoes | Local fashion/kids retailers, regional marketplaces, brand stores when relevant. Examples: Amazon/Zalando/Target; WB/Ozon/Яндекс/Детский мир for Russia. |
+| Appliances/home | Local major retailers, brand stores, regional marketplaces. Examples: Amazon/Best Buy/MediaMarkt; Яндекс Маркет/Ozon/DNS/М.Видео/Эльдорадо for Russia. |
+| Exact brand item | Brand/official store + 2 relevant marketplaces + major retailer when relevant. |
 
 Minimum coverage when the user did not name a source:
 
@@ -248,7 +248,7 @@ Keep the visible answer compact. Provide deeper analysis only if asked.
 
 Before responding, verify:
 
-- Delivery known or explicitly not needed.
+- Delivery region known or explicitly not needed.
 - Clean brief used; no stuffed query from conversation history.
 - Source plan followed or exceptions stated.
 - At least minimum source coverage attempted.
@@ -286,10 +286,11 @@ For any state-changing step, summarize what will change, where, risk, rollback i
 
 | User says | First response | Correct behavior |
 |---|---|---|
+| “Find the best price for this product link.” | “Where do you need delivery? Exact item only or are alternatives allowed?” | Same-SKU comparison across relevant local/global sources, risk notes, best link. |
+| “I need a Zigbee USB coordinator; cheapest is fine, I can wait.” | “Where is delivery? Home Assistant/Zigbee2MQTT/ZHA, or should I compare broadly?” | Use compatibility docs plus AliExpress/global sources and local fast alternatives; compare price, chip, firmware, delivery. |
+| “Compare robot vacuums under $400 with fast delivery to Berlin.” | “Any must-have features: self-emptying, mopping, pet hair, or mapping?” | Region-aware EU/local sources, clean queries, market map, priced recommendations. |
 | “Посмотри Samsung 990 Pro 2TB” | “Куда доставка? Аналоги тоже проверить, если найдутся лучше по отзывам/цене?” | Verify Samsung first; analogs only if allowed. |
-| “Нужен тихий диск 4–8 ТБ, цена около 20к” | “Куда доставка? Внутренний или внешний тоже можно?” | Multi-source map by capacity, ₽/TB, value zone, interesting offers. |
-| “Сандалии кожаные детские для девочки, 26, срочно” | “Куда доставка? Бюджет? Закрытый нос/примерка важны?” | Clean query “сандалии детские”; filters: 26, delivery, budget, material, closed toe; check WB/Ozon/Яндекс/Детский мир. |
-| “Где дешевле этот товар?” | “Куда доставка? Искать строго эту модель или можно аналоги?” | Same-SKU comparison across sources, risk notes, best link. |
+| “Сандалии кожаные детские для девочки, 26, срочно” | “Куда доставка? Бюджет? Закрытый нос/примерка важны?” | Clean query “сандалии детские”; filters: 26, delivery, budget, material, closed toe; use region-relevant stores. |
 
 ## Notes for future versions
 
