@@ -66,5 +66,5 @@ The skill chooses sources by both category and purchase mode:
 ## Install
 
 ```bash
-clawhub install Pe4atnik/marketplace-guru
+clawhub install marketplace-guru
 ```
